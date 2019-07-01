@@ -27,11 +27,12 @@ class MetaData(metaclass=ABCMeta):
 
 class DailyData(MetaData):
     def __init__(self):
-        root_dir = 'meta_of_daily_data'
-        self._init(root_dir)
-        self.__meta = bcolz.open(rootdir = root_dir)
-        self.__meta.flush()
-    
+        self.__root_dir = "E:\\daily_stock_data"
+    def init(self):
+        self._init(self.__root_dir)
+        self.__meta = bcolz.open(rootdir = self.__root_dir)
+        self.__meta.flush() 
+    @classmethod   
     def GetBasicInfo(self):
         return self.__meta
     def AddMeta(self,meta):
