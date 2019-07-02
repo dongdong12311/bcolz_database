@@ -40,6 +40,8 @@ class LocalData:
         metas = self._meta_data.GetBasicInfo()
         for index,value in enumerate(metas):
             metas[index] = os.path.join(self.__rootdir,value)
+            if  not os.path.exists(metas[index]):
+                os.mkdir(metas[index])
         for stock in stock_list:
             if stock not in local_stock_list:
                 for meta in metas:                    
@@ -50,7 +52,7 @@ class LocalData:
         'add a new stock if the stock code exists, return false'
         target_path = os.path.join(meta,stock)
         if os.path.exists(target_path):
-            print(stock + "already_exists") 
+            print(stock + " already_exists") 
             return False
         # create 
         c = bcolz.carray( np.array(()), rootdir=target_path)
@@ -59,9 +61,10 @@ class LocalData:
     def AddMeta(self,meta):
         self._meta_data.AddMeta(meta)
     
-
-a = LocalData()
-a.AddMeta('open')
-a.UpdateData()
+if __name__ == '__main__':
+    a = LocalData()
+    
+    #a.AddMeta('open')
+    a.UpdateData()
 
 

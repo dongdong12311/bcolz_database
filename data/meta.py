@@ -36,6 +36,6 @@ class DailyData(MetaData):
         return self.__meta
     def AddMeta(self,meta):
         if meta not in self.__meta:    
-            self.__meta.append(meta)    
+            self.__meta.append(meta)
     def __del__(self):
         self.__meta.flush()
